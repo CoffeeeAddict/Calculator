@@ -1,0 +1,29 @@
+html, body {
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+.calculatorContainer {
+    flex: 1;
+    max-height: 80vh;
+}
+
+.calculator {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.blankSpace {
+    min-height: 10vh;
+    min-width: 100%;
+}
