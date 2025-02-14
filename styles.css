@@ -15,6 +15,122 @@ html, body {
 .calculatorContainer {
     flex: 1;
     max-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calculatorContentContainer {
+    max-height: 80vh;
+    aspect-ratio: 89/111;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonBox {
+    cursor: pointer;
+    position: absolute;
+    width: 20.2247%;
+    height: 16.2162%;
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+}
+
+.buttonContainer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+}
+
+#buttonOneContainer {
+    top: 23.423423423%;
+    left: 4.494382022%;
+}
+
+#buttonTwoContainer {
+    top: 23.423423423%;
+    left: 28.08988764%;
+}
+
+#buttonThreeContainer {
+    top: 23.423423423%;
+    left: 51.685393258%;
+}
+
+#buttonFourContainer {
+    top: 42.342342342%;
+    left: 4.494382022%;
+}
+
+#buttonFiveContainer {
+    top: 42.342342342%;
+    left: 28.08988764%;
+}
+
+#buttonSixContainer {
+    top: 42.342342342%;
+    left: 51.685393258%;
+}
+
+#buttonSevenContainer {
+    top: 61.261261261%;
+    left: 4.494382022%;
+}
+
+#buttonEightContainer {
+    top: 61.261261261%;
+    left: 28.08988764%;
+}
+
+#buttonNineContainer {
+    top: 61.261261261%;
+    left: 51.685393258%;
+}
+
+#buttonZeroContainer {
+    top: 80.18018018%;
+    left: 28.08988764%;
+}
+
+#buttonCancelContainer {
+    top: 80.18018018%;
+    left: 4.494382022%;
+}
+
+#buttonEqualsContainer {
+    top: 80.18018018%;
+    left: 51.685393258%;
+}
+
+#buttonAddContainer {
+    top: 23.423423423%;
+    left: 75.280898876%;
+}
+
+#buttonSubtractContainer {
+    top: 42.342342342%;
+    left: 75.280898876%;
+}
+
+#buttonMultiplyContainer {
+    top: 61.261261261%;
+    left: 75.280898876%;
+}
+
+#buttonDivideContainer {
+    top: 80.18018018%;
+    left: 75.280898876%;
+}
+
+.button {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
 }
 
 .calculator {
