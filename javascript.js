@@ -1,29 +1,141 @@
 const numberButtons = document.querySelectorAll(".numberButton");
+const operationButtons = document.querySelectorAll(".operationButton");
+const equalsButton = document.querySelector("#buttonEqualsContainer");
+const clearButton = document.querySelector("#buttonCancelContainer");
 const display = document.querySelector(".display");
 
 let currentNumber = 0;
-let storedNumber = 0;
+let storedNumber = "unchosen";
 let result = 0;
+let operator = "unchosen"
 
 numberButtons.forEach((button) => {
     button.addEventListener("click", numberClick)
 })
 
-function numberClick(e) {
-    let selectedNumber = getButtonNumber(e.currentTarget);
-    if(display.childElementCount >= 7) {
+operationButtons.forEach((button) => {
+    button.addEventListener("click", operationClick)
+})
+
+equalsButton.addEventListener("click", equalsClick);
+clearButton.addEventListener("click", clearCalculator);
+
+function clearCalculator() {
+    clearDisplay();
+    currentNumber = 0;
+    storedNumber = "unchosen";
+    result = 0;
+    operator = "unchosen"
+}
+
+function equalsClick() {
+    if(storedNumber === "unchosen" || currentNumber === "unchosen") {
         return;
     }
-    
+    calculateResult();
+    storedNumber = currentNumber;
+    currentNumber = "unchosen";
+}
+
+function calculateResult() {
+    if(storedNumber === "unchosen" || currentNumber == "unchosen") {
+        return;
+    }
+
+    result = operate(storedNumber, currentNumber, operator);
+    if(Math.round(result) != result) {
+        result = Math.round(result*100)/100;
+    }
+    fillDisplay(result);
+
+    currentNumber = result;
+    storedNumber = "unchosen";
+    operator = "unchosen";
+}
+
+function operationClick(e) {
+    if(operator !== "unchosen" && storedNumber === "unchosen") {
+        operator = getOperatorType(e.currentTarget);
+        return;
+    }
+
+    if(storedNumber !== "unchosen" && currentNumber !== "unchosen") {
+        calculateResult();
+    }
+
+    if(currentNumber === "unchosen") {
+        operator = getOperatorType(e.currentTarget);
+        return;
+    }
+
+    storedNumber = currentNumber;
+    currentNumber = 0;
+    operator = getOperatorType(e.currentTarget);
+}
+
+function getOperatorType(button) {
+    let id = button.id;
+    switch(id) {
+        case "buttonAddContainer":
+            return "add";
+            break;
+        case "buttonSubtractContainer":
+            return "subtract";
+            break;
+        case "buttonMultiplyContainer":
+            return "multiply";
+            break;
+        case "buttonDivideContainer":
+            return "divide";
+            break;
+    }
+}
+
+function numberClick(e) {
+    let selectedNumber = getButtonNumber(e.currentTarget);
+
+    if(display.childElementCount >= 7 && 
+        (currentNumber !== 0 && currentNumber !== "unchosen")) {
+        return;
+    }
+
+    if(currentNumber === 0) {
+        clearDisplay();
+        currentNumber = 0;
+    }
+
+    if(currentNumber === "unchosen") {
+        if(operator === "unchosen") {
+            clearCalculator();
+        } else {
+            clearDisplay();
+        }
+        currentNumber = 0;
+    }
+
     addToDisplay(selectedNumber);
     currentNumber *= 10;
     currentNumber += selectedNumber;
-    console.log(currentNumber);
 }
 
 function addToDisplay(number) {
     let icon = createIcon(number);
     display.appendChild(icon);
+}
+
+function fillDisplay(number) {
+    clearDisplay();
+    number = String(number);
+
+    for(let i=0; i<number.length; i++) {
+        addToDisplay(Number(number[i]));
+    }
+}
+
+function clearDisplay() {
+    while(display.firstChild) {
+        display.removeChild(display.firstChild);
+    }
 }
 
 function createIcon(number) {
@@ -61,7 +173,7 @@ function createIcon(number) {
         case 0:
             icon.src = "./img/icons/zero.png"
             break;
-        case ".":
+        default:
             icon.src = "./img/icons/dot.png"
             break;
     }
